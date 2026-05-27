@@ -9,7 +9,7 @@ import com.daw.persistence.enums.Tipo;
 import com.daw.services.JuegoService;
 
 @RestController
-@RequestMapping("/juegos")
+@RequestMapping("/juego")
 public class JuegoController {
 
     @Autowired
@@ -42,24 +42,24 @@ public class JuegoController {
         juegoService.borrar(id);
     }
 
-    @GetMapping("/genero")
+    @GetMapping("/buscar/genero")
     public List<JuegoEntity> buscarPorGenero(@RequestParam String genero) {
         return juegoService.buscarPorGenero(genero);
     }
 
-    @GetMapping("/nombre")
+    @GetMapping("/buscar/nombre")
     public List<JuegoEntity> buscarPorNombre(@RequestParam String nombre) {
         return juegoService.buscarPorNombre(nombre);
     }
 
-    @GetMapping("/plataforma")
+    @GetMapping("/buscar/plataforma")
     public List<JuegoEntity> buscarPorPlataforma(@RequestParam String plataforma) {
         return juegoService.buscarPorPlataforma(plataforma);
     }
 
-    @GetMapping("/expansiones")
-    public List<JuegoEntity> listarExpansiones() {
-        return juegoService.buscarPorTipo(Tipo.EXPANSION);
+    @GetMapping("/buscar/tipo")
+    public List<JuegoEntity> buscarPorTipo(@RequestParam Tipo tipo) {
+        return juegoService.buscarPorTipo(tipo);
     }
 
     @GetMapping("/dlc")
@@ -72,7 +72,7 @@ public class JuegoController {
         return juegoService.buscarPorTipo(Tipo.BASE);
     }
 
-    @GetMapping("/precio")
+    @GetMapping("buscar/precio")
     public List<JuegoEntity> buscarPorPrecio(@RequestParam Double min, @RequestParam Double max) {
         return juegoService.buscarPorRangoPrecio(min, max);
     }
@@ -82,14 +82,13 @@ public class JuegoController {
         return juegoService.obtenerTop5Exitos();
     }
 
-    @PutMapping("/{id}/completar")
+    @PutMapping("/{id}/alternar-completado")
     public JuegoEntity alternarCompletado(@PathVariable Integer id) {
         return juegoService.alternarCompletado(id);
     }
 
-    @PutMapping("/descuento")
-    @ResponseStatus(HttpStatus.OK)
-    public void aplicarDescuento(@RequestParam String genero, @RequestParam Double porcentaje) {
+    @PutMapping("/descuento-masivo")
+    public void aplicarDescuentoMasivo(@RequestParam String genero, @RequestParam Double porcentaje) {
         juegoService.aplicarDescuentoMasivo(genero, porcentaje);
     }
 }

@@ -1,123 +1,394 @@
 {
-    "info": {
-        "name": "API daw-games Completa",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
-        {
-            "name": "1. Obtener todos",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos", "host": ["http://localhost:8080"], "path": ["juegos"] }
-            }
-        },
-        {
-            "name": "2. Obtener por ID",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos/1", "host": ["http://localhost:8080"], "path": ["juegos", "1"] }
-            }
-        },
-        {
-            "name": "3. Crear juego",
-            "request": {
-                "method": "POST",
-                "header": [ { "key": "Content-Type", "value": "application/json" } ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n    \"nombre\": \"Hollow Knight: Silksong\",\n    \"genero\": \"Metroidvania\",\n    \"plataformas\": \"PC, Consolas\",\n    \"precio\": 29.99,\n    \"descargas\": 0,\n    \"fechaLanzamiento\": \"2026-12-01\",\n    \"tipo\": \"BASE\",\n    \"completado\": false\n}"
-                },
-                "url": { "raw": "http://localhost:8080/juegos", "host": ["http://localhost:8080"], "path": ["juegos"] }
-            }
-        },
-        {
-            "name": "4. Modificar juego",
-            "request": {
-                "method": "PUT",
-                "header": [ { "key": "Content-Type", "value": "application/json" } ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n    \"nombre\": \"Minecraft Premium\",\n    \"genero\": \"Sandbox\",\n    \"plataformas\": \"PC, Consolas, Movil\",\n    \"precio\": 35.00,\n    \"descargas\": 600000000,\n    \"fechaLanzamiento\": \"2011-11-18\",\n    \"tipo\": \"BASE\",\n    \"completado\": true\n}"
-                },
-                "url": { "raw": "http://localhost:8080/juegos/1", "host": ["http://localhost:8080"], "path": ["juegos", "1"] }
-            }
-        },
-        {
-            "name": "5. Borrar juego",
-            "request": {
-                "method": "DELETE",
-                "url": { "raw": "http://localhost:8080/juegos/6", "host": ["http://localhost:8080"], "path": ["juegos", "6"] }
-            }
-        },
-        {
-            "name": "6. Buscar por genero",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos/genero?genero=RPG", "host": ["http://localhost:8080"], "path": ["juegos", "genero"], "query": [ { "key": "genero", "value": "RPG" } ] }
-            }
-        },
-        {
-            "name": "7. Buscar por nombre",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos/nombre?nombre=craft", "host": ["http://localhost:8080"], "path": ["juegos", "nombre"], "query": [ { "key": "nombre", "value": "craft" } ] }
-            }
-        },
-        {
-            "name": "8. Buscar por plataforma",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos/plataforma?plataforma=Movil", "host": ["http://localhost:8080"], "path": ["juegos", "plataforma"], "query": [ { "key": "plataforma", "value": "Movil" } ] }
-            }
-        },
-        {
-            "name": "9. Listar expansiones",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos/expansiones", "host": ["http://localhost:8080"], "path": ["juegos", "expansiones"] }
-            }
-        },
-        {
-            "name": "10. Listar DLCs",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos/dlc", "host": ["http://localhost:8080"], "path": ["juegos", "dlc"] }
-            }
-        },
-        {
-            "name": "11. Listar juegos base",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos/base", "host": ["http://localhost:8080"], "path": ["juegos", "base"] }
-            }
-        },
-        {
-            "name": "12. Buscar por rango de precio",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos/precio?min=10&max=40", "host": ["http://localhost:8080"], "path": ["juegos", "precio"], "query": [ { "key": "min", "value": "10" }, { "key": "max", "value": "40" } ] }
-            }
-        },
-        {
-            "name": "13. Top 5 Exitos",
-            "request": {
-                "method": "GET",
-                "url": { "raw": "http://localhost:8080/juegos/exitos", "host": ["http://localhost:8080"], "path": ["juegos", "exitos"] }
-            }
-        },
-        {
-            "name": "14. Alternar Completado (Reto)",
-            "request": {
-                "method": "PUT",
-                "url": { "raw": "http://localhost:8080/juegos/2/completar", "host": ["http://localhost:8080"], "path": ["juegos", "2", "completar"] }
-            }
-        },
-        {
-            "name": "15. Aplicar Descuento Masivo (Reto)",
-            "request": {
-                "method": "PUT",
-                "url": { "raw": "http://localhost:8080/juegos/descuento?genero=Sandbox&porcentaje=0.50", "host": ["http://localhost:8080"], "path": ["juegos", "descuento"], "query": [ { "key": "genero", "value": "Sandbox" }, { "key": "porcentaje", "value": "0.50" } ] }
-            }
+  "info": {
+    "_postman_id": "b3c97303-1fbf-41c3-913b-84c801c5e59b",
+    "name": "API daw-games Completa",
+    "description": "Coleccion con los 15 endpoints del controlador de juegos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52616886",
+    "_collection_link": "https://go.postman.co/collection/52616886-b3c97303-1fbf-41c3-913b-84c801c5e59b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Obtener todos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego"
+          ]
         }
-    ]
+      },
+      "response": []
+    },
+    {
+      "name": "2. Obtener por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. Crear juego",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"nombre\": \"Elden Ring\",\n    \"genero\": \"RPG\",\n    \"plataformas\": \"PC, PS5, Xbox\",\n    \"precio\": 59.99,\n    \"completado\": false,\n    \"descargas\": 12500,\n    \"fechaLanzamiento\": \"2022-02-25\",\n    \"tipo\": \"BASE\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/juego",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4. Modificar juego",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": 1,\n    \"nombre\": \"Hollow Knight Silksong\",\n    \"genero\": \"Metroidvania\",\n    \"plataformas\": \"PC, Nintendo Switch\",\n    \"precio\": 29.99,\n    \"completado\": false,\n    \"descargas\": 0,\n    \"fechaLanzamiento\": \"2026-12-31\",\n    \"tipo\": \"BASE\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/juego/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5. Borrar juego",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6. Buscar por genero",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/buscar/genero?genero=RPG",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "buscar",
+            "genero"
+          ],
+          "query": [
+            {
+              "key": "genero",
+              "value": "RPG"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "7. Buscar por nombre",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/buscar/nombre?nombre=Hollow",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "buscar",
+            "nombre"
+          ],
+          "query": [
+            {
+              "key": "nombre",
+              "value": "Hollow"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "8. Buscar por plataforma",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/buscar/plataforma?plataforma=PC",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "buscar",
+            "plataforma"
+          ],
+          "query": [
+            {
+              "key": "plataforma",
+              "value": "PC"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "9. Listar expansiones",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/buscar/tipo?tipo=EXPANSION",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "buscar",
+            "tipo"
+          ],
+          "query": [
+            {
+              "key": "tipo",
+              "value": "EXPANSION"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "10. Listar DLCs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/buscar/tipo?tipo=DLC",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "buscar",
+            "tipo"
+          ],
+          "query": [
+            {
+              "key": "tipo",
+              "value": "DLC"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "11. Listar juegos base",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/buscar/tipo?tipo=BASE",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "buscar",
+            "tipo"
+          ],
+          "query": [
+            {
+              "key": "tipo",
+              "value": "BASE"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "12. Buscar por rango de precio",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/buscar/precio?min=10&max=40",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "buscar",
+            "precio"
+          ],
+          "query": [
+            {
+              "key": "min",
+              "value": "10"
+            },
+            {
+              "key": "max",
+              "value": "40"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "13. Top 5 Exitos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/exitos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "exitos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "14. Alternar Completado",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/2/alternar-completado",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "2",
+            "alternar-completado"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "15. Aplicar Descuento",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/juego/descuento-masivo?genero=RPG&porcentaje=0.20",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "juego",
+            "descuento-masivo"
+          ],
+          "query": [
+            {
+              "key": "genero",
+              "value": "RPG"
+            },
+            {
+              "key": "porcentaje",
+              "value": "0.20"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
 }
